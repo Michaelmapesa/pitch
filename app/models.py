@@ -4,7 +4,7 @@ from email.policy import default
 from multiprocessing.sharedctypes import Value
 from unicodedata import category
 from flask_login import UserMixin
-from app import dashboard
+from app import db
 from flask_sqlalchemy  import SQLAlchemy
 
 class User(UserMixin, db.Model):
