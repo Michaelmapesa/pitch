@@ -1,5 +1,4 @@
-from distutils.command.config import config
-from distutils.debug import DEBUG
+
 import os
 
 class Config:

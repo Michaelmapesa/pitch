@@ -1,47 +1,49 @@
-from distutils.command.upload import upload
-from flask import Flask, render_template, redirect, url_for
-from flask_bootstrap import Bootstrap
-from flask_wtf import FlaskForm 
-from wtforms import StringField, PasswordField, BooleanField
-from wtforms.validators import InputRequired, Email, Length
-from flask_sqlalchemy  import SQLAlchemy
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+from flask_mail import Mail
 from flask_migrate import Migrate
+
 from .config import config_options
+
 
 app = Flask(__name__)
 
-app.config['SECRET_KEY'] = ""
-app.config['SQLALCHEMY_DATABASE_URI'] = "database_uri goes here"
 
-bootstrap = Bootstrap(app)
+app.config['SECRET_KEY'] = ''
+app.config['SQLALCHEMY_DATABASE_URI'] = 'database_uri goes here'
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
+UPLOAD_FOLDER = 'app/static/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 db = SQLAlchemy(app)
-Migrate = Migrate(app, db)
+migrate = Migrate(app, db)
 
 mail = Mail(app)
 
+from .models import User
+
+
 def create_app(config_name):
-      login_manager = LoginManager()
-      login_manager.init_app(app)
-      login_manager.login_view = 'auth.login'
-      app.config.from_object(config_options[config_name])
 
+    login_manager = LoginManager()
+    login_manager.login_view = 'auth.login'
+    login_manager.init_app(app)
+    app.config.from_object(config_options[config_name])
 
+    @login_manager.user_loader
+    def load_user(user_id):
+        # since the user_id is the primary key, we use it to query
+        return User.query.get(int(user_id))
 
-      @login_manager.user_loader
-      def load_user(user_id):
-          return User.query.get(int(user_id))
+        # blueprint for auth routes in our app
+    from .auth import auth as auth_blueprint
+    app.register_blueprint(auth_blueprint)
 
-      from.auth import auth as auth_blueprint
-      app.register_blueprint(auth_blueprint)
-
-      from .main import main as main_blueprint
-      app.register_blueprint(main_blueprint)
-      return app
-
-
-
-
-
+    # blueprint for non-auth parts of the app
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+    return app
