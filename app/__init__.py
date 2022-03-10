@@ -4,20 +4,21 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_migrate import Migrate
 
+
 from .config import config_options
 
 
 app = Flask(__name__)
 
 
-app.config['SECRET_KEY'] = 'mike123'
-app.config['SQLALCHEMY_DATABASE_URI'] = ''
+app.config['SECRET_KEY'] = 'mike'
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+pyscopg2://mike:Access@localhost/pitches"
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
-# UPLOAD_FOLDER = 'app/static/uploads'
-# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+UPLOAD_FOLDER = 'app/static/uploads'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
