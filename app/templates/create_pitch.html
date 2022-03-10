@@ -1,0 +1,30 @@
+{% extends "base.html" %} 
+{% block content %} 
+<div class="box">
+    <h3 class="heading-3">Create a Pitch</h3>
+    {% with message = get_flashed_messages()%} 
+    {% if messages %} 
+    <div class="notification is-danger">
+        {{ messages[0]}}
+
+    </div>
+    {% endif %} 
+    {% endwith %} 
+    <form action="/create_pitch" method="POST" class="create-pitch">
+        <textarea name="text" id="none" cols="30" rows="7" placeholder="Enter pitch"></textarea>
+        <select name="category" class="select-pitch">
+            <option value="">Select your category</option>
+            <option value="health">Health</option>
+            <option value="finance">Finace</option>
+            <option value="marketing">Marketing</option>
+            <option value="design">Design</option>
+            <option value="business">Business</option>
+            <option value="technology">Technology</option>
+ 
+        </select>
+        <button type="submit" class="btn">Submit</button>
+
+    </form>
+
+</div>
+{% endblock %}
