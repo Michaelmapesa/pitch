@@ -1,0 +1,13 @@
+{% extends "base.html"%}
+{% import 'macros.html' as macro%} 
+{% block content %} 
+<h1 class="title">
+  Welcome, {{username}}
+
+</h1>
+{% if pitches %} 
+{{macro.displayPitches(pitches)}}
+{% endif %} 
+<p>No pitches</p>
+{% endif %} 
+{% endblock %}
