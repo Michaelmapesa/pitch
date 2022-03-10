@@ -10,14 +10,14 @@ from .config import config_options
 app = Flask(__name__)
 
 
-app.config['SECRET_KEY'] = 'mapesa123'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'database_uri goes here'
+app.config['SECRET_KEY'] = 'mike123'
+app.config['SQLALCHEMY_DATABASE_URI'] = ''
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
-UPLOAD_FOLDER = 'app/static/uploads'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+# UPLOAD_FOLDER = 'app/static/uploads'
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
