@@ -77,9 +77,6 @@ def signup_post():
         user = User(email=email, username=username,
                     password=generate_password_hash(password, method='sha256'))
 
-        # msg = Message(subject='Welcome', sender=os.environ.get(
-        #     'SENDER_EMAIL'), recipients=[email], body=f'Hello {username},\n Welcome to the Pitches App. Thanks for signing up!')
-        # mail.send(msg)
 
         db.session.add(user)
         db.session.commit()

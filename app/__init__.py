@@ -10,8 +10,8 @@ from .config import config_options
 app = Flask(__name__)
 
 
-app.config['SECRET_KEY'] = ''
-app.config['SQLALCHEMY_DATABASE_URI'] = ''
+app.config['SECRET_KEY'] = 'mapesa123'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'database_uri goes here'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
