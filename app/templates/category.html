@@ -1,9 +1,17 @@
-{% extends "base.html"} 
-{% import 'macros.html'as macro%} 
+{% extends "base.html" %}
+{% import 'macros.html' as macro%}
+
 {% block content %}
-{% if pitches %} 
-{{macros.displayPitches(pitches)}} 
-{% else %} 
+
+
+{% if pitches %}
+
+{{macro.displayPitches(pitches)}}
+
+{% else %}
+
 <p>No pitches</p>
-{% endif %} 
+
+{% endif %}
+
 {% endblock %}
