@@ -19,7 +19,7 @@ body {
 
 :root {
   --color-primary: hsl(240, 89%, 7%);
-  --color-secondary: #00a4ef;
+  --color-secondary: green;
   --color-white: hsl(0, 0%, 100%);
   --color-grey: #f8f8f8;
 }
@@ -67,7 +67,7 @@ a:active {
   font-size: 1.8rem;
   border: none;
   color: white;
-  background-color: rgb(2, 2, 34);
+  background-color: green;
 }
 
 .heading-3 {
@@ -92,7 +92,7 @@ a:active {
 .logo_name a {
   font-size: 3.5rem;
   font-family: "Courier New", Courier, monospace;
-  color: black;
+  color: green;
 }
 
 .navbar-item {
@@ -107,7 +107,7 @@ a:active {
 }
 
 .pitches {
-  padding: 2rem;
+  padding: 3rem;
   display: flex;
   align-items: flex-start;
   row-gap: 5rem;
@@ -164,7 +164,7 @@ a:active {
 }
 
 .collapsible {
-  background-color: #777;
+  background-color: green;
   color: white;
   cursor: pointer;
   padding: 18px;
@@ -177,7 +177,7 @@ a:active {
 
 .active,
 .collapsible:hover {
-  background-color: #555;
+  background-color: red;
 }
 
 .collapsible:after {
@@ -197,7 +197,7 @@ a:active {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
-  background-color: #f1f1f1;
+  background-color: red;
 }
 .content input {
   padding: 0.4rem;
