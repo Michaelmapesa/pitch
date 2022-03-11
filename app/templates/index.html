@@ -1,17 +1,19 @@
 {% extends "base.html" %}
-{% import 'macros.html' as macro%}
+
 
 {% block content %}
 
 
-{% if pitches %}
 
-{{macro.displayPitches(pitches)}}
+<ul>{% for pitch in pitches %}   
+    <li class="cards">
+        <h1>{{ pitch.text }}</h1><p>{{ pitch.category }}</p><p>{{ pitch.date_created }}</p><p>{{ pitch.author }}</p>
+        <p>{{ pitch.comment }}</p>
 
-{% else %}
+    </li>
+     {% endfor %}
+</ul>
 
-<p>No pitches</p>
 
-{% endif %}
 
 {% endblock %}

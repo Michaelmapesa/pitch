@@ -6,7 +6,7 @@ import os
 
 from .models import User
 from . import db
-from .email import mail
+# from .email import mail
 
 
 auth = Blueprint('auth', __name__)

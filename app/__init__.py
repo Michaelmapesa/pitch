@@ -2,37 +2,25 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_mail import Mail
-from flask_migrate import Migrate
+import psycopg2
 
 
 from .config import config_options
 
+db = SQLAlchemy()
 
-app = Flask(__name__)
-
-
-app.config['SECRET_KEY'] = 'mike'
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql+pyscopg2://mike:Access@localhost/pitches"
-
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-
-UPLOAD_FOLDER = 'app/static/uploads'
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-
-mail = Mail(app)
+mail = Mail()
 
 from .models import User
 
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
 
 def create_app(config_name):
-
-    login_manager = LoginManager()
-    login_manager.login_view = 'auth.login'
+    app = Flask(__name__)
+    mail.init_app(app)
     login_manager.init_app(app)
+    db.init_app(app)
     app.config.from_object(config_options[config_name])
 
     @login_manager.user_loader
