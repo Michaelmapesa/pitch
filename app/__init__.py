@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_mail import Mail
 import psycopg2
+import os
 
 
 from .config import config_options
@@ -35,4 +36,8 @@ def create_app(config_name):
     # blueprint for non-auth parts of the app
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+    
     return app
